@@ -16,8 +16,7 @@ const Plans = ['', 'monthly', 'daily', 'yearly'];
 
 const paymentText = `CON Payment Plan
 1. Daily (₦20)
-2. Monthly(₦520)
-3. Yearly(6120)`;
+2. Monthly(₦520)`;
 
 const enterNameText = 'CON Enter FullName';
 
@@ -69,11 +68,6 @@ const transactions = {
     User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
   },
 
-  '1*1*3': (res, phoneNumber) => {
-    res.send(enterNameText);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[3] });
-  },
-
   '1*2*1': (res, phoneNumber) => {
     res.send(enterNameText);
     User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[1] });
@@ -84,9 +78,14 @@ const transactions = {
     User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
   },
 
-  '1*2*3': (res, phoneNumber) => {
+  '1*3*1': (res, phoneNumber) => {
     res.send(enterNameText);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[3] });
+    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[1] });
+  },
+
+  '1*3*2': (res, phoneNumber) => {
+    res.send(enterNameText);
+    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
   }
 };
 

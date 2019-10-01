@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const log = require('morgan');
 const connectToDb = require('./connect-database');
 const transactions = require('./transactions');
+const faker = require('faker');
 
 const app = express();
 
@@ -20,9 +21,17 @@ app.post('*', (req, res) => {
   let { sessionId, serviceCode, phoneNumber, text } = req.body;
   if (text == '') transactions.start(res);
 
-  transactions[text](res);
+  if (!transaction[text]) {
+    let name = text.split('*');
+    name = name[name.length - 1];
+    const bhisNum = faker.PhoneNumber.phoneNumber();
+    if (!name) res.send(`END invalid input`);
+    res.send(`END Thank you ${name} for registering on the BHIS 
+    BHIS Reg No: ${bhisNum}`);
+    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
+  }
 
-  if (!transaction[text]) res.status(400).send('Bad request!');
+  transactions[text](res);
 });
 
 const port = process.env.PORT || 3003;

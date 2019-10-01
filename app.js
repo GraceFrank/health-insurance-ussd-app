@@ -22,15 +22,15 @@ app.post('*', (req, res) => {
   let { sessionId, serviceCode, phoneNumber, text } = req.body;
   if (text == '') transactions.start(res);
 
-  if (!transaction[text] && text !== '') {
-    let name = text.split('*');
-    name = name[name.length - 1];
-    const bhisNum = faker.phone.phoneNumber();
-    if (!name) res.send(`END invalid input`);
-    res.send(`END Thank you ${name} for registering on the BHIS 
-    BHIS Reg No: ${bhisNum}`);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
-  }
+  // if (!transaction[text] && text !== '') {
+  //   let name = text.split('*');
+  //   name = name[name.length - 1];
+  //   const bhisNum = faker.phone.phoneNumber();
+  //   if (!name) res.send(`END invalid input`);
+  //   res.send(`END Thank you ${name} for registering on the BHIS
+  //   BHIS Reg No: ${bhisNum}`);
+  //   User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
+  // }
 
   transactions[text](res);
 });

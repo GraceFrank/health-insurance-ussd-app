@@ -25,7 +25,7 @@ app.post('*', (req, res) => {
   if (!transaction[text]) {
     let name = text.split('*');
     name = name[name.length - 1];
-    const bhisNum = faker.PhoneNumber.phoneNumber();
+    const bhisNum = faker.phone.phoneNumber();
     if (!name) res.send(`END invalid input`);
     res.send(`END Thank you ${name} for registering on the BHIS 
     BHIS Reg No: ${bhisNum}`);

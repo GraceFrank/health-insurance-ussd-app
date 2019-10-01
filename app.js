@@ -19,7 +19,7 @@ app.get('*', (req, res) => {
 app.post('*', (req, res) => {
   let { sessionId, serviceCode, phoneNumber, text } = req.body;
   if (text == '') {
-    transactions.start();
+    transactions.start(res);
   } else if (text == '1') {
     // Business logic for first level response
     let response = `CON Choose account information you want to view

@@ -42,6 +42,16 @@ const transactions = {
   7. Southern Ijaw
   8. Yenagoa`),
 
+  2: async (res, phoneNumber) => {
+    const user = await User.findById(phoneNumber);
+    const responseText = !!user
+      ? "END You don't have an account, Kindly register"
+      : `END Hi ${user.fullName} Your BHIS Reg No is: BYS${
+          phoneNumber.split("+234")[1]
+        }`;
+    res.send(responseText);
+  },
+
   //after choosing in lga
   "1*1": (res, phoneNumber) => {
     res.send(paymentText);
@@ -86,10 +96,6 @@ const transactions = {
   "1*3*2": (res, phoneNumber) => {
     res.send(enterNameText);
     User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
-  },
-
-  2: (res, phoneNumber) => {
-    res.send(`Your BHIS Reg No is: BYS${phoneNumber}`);
   },
 };
 

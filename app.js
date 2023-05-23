@@ -22,7 +22,7 @@ app.post("*", (req, res) => {
   else if (!transactions[text] && text !== "") {
     let name = text.split("*");
     name = name[name.length - 1];
-    const bhisNum = `BYS${phoneNumber}`;
+    const bhisNum = `BYS${phoneNumber.split("+234")[1]}`;
     if (!name) res.send(`END invalid input`);
     res.send(`END Thank you ${name} for registering on the BHIS
     BHIS Reg No: ${bhisNum}`);

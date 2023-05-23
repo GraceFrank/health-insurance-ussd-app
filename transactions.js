@@ -21,17 +21,24 @@ const paymentText = `CON Payment Plan
 const enterNameText = "CON Enter FullName";
 
 const transactions = {
-  start: (res, phoneNumber) => {
+  start: (res) => {
     res.send(
       `CON Welcome to 360 Health Insurance
     1. Register
     2. BHIS Number
     3. Payment Summary`
     );
-    User.create({ _id: phoneNumber });
   },
 
-  1: (res) =>
+  1: async (res, phoneNumber) => {
+    const user = await User.findById(phoneNumber);
+    if (!!user)
+      return res.send(
+        `END You Already registered, Your BHIS Reg No is: BYS${
+          phoneNumber.split("+234")[1]
+        }`
+      );
+
     res.send(`CON Local Govt Area
   1. Brass
   2. Ekeremor
@@ -40,16 +47,9 @@ const transactions = {
   5. Ogbia
   6. Sagbama
   7. Southern Ijaw
-  8. Yenagoa`),
+  8. Yenagoa`);
 
-  2: async (res, phoneNumber) => {
-    const user = await User.findById(phoneNumber);
-    const responseText = !!user
-      ? "END You don't have an account, Kindly register"
-      : `END Hi ${user.fullName} Your BHIS Reg No is: BYS${
-          phoneNumber.split("+234")[1]
-        }`;
-    res.send(responseText);
+    User.create({ _id: phoneNumber });
   },
 
   //after choosing in lga
@@ -96,6 +96,17 @@ const transactions = {
   "1*3*2": (res, phoneNumber) => {
     res.send(enterNameText);
     User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
+  },
+
+  2: async (res, phoneNumber) => {
+    const user = await User.findById(phoneNumber);
+    const responseText = !!user
+      ? `END Hi ${user.fullName}, Your BHIS Reg No is: BYS${
+          phoneNumber.split("+234")[1]
+        }`
+      : "END You don't have an account, Kindly register";
+
+    res.send(responseText);
   },
 };
 

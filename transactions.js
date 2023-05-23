@@ -31,7 +31,7 @@ const transactions = {
   },
 
   1: async (res, phoneNumber) => {
-    const user = await User.findById(phoneNumber);
+    const user = await User.findOne({ phoneNumber });
     if (!!user)
       return res.send(
         `END You Already registered, Your BHIS Reg No is: BYS${
@@ -55,51 +55,52 @@ const transactions = {
   //after choosing in lga
   "1*1": (res, phoneNumber) => {
     res.send(paymentText);
-    User.findByIdAndUpdate(phoneNumber, { lga: lgas[1] });
+    User.findOneAndUpdate({ phoneNumber }, { lga: lgas[1] });
   },
+
   "1*2": (res, phoneNumber) => {
     res.send(paymentText);
-    User.findByIdAndUpdate(phoneNumber, { lga: lgas[2] });
+    User.findOneAndUpdate({ phoneNumber }, { lga: lgas[2] });
   },
 
   "1*3": (res, phoneNumber) => {
     res.send(paymentText);
-    User.findByIdAndUpdate(phoneNumber, { lga: lgas[3] });
+    User.findOneAndUpdate({ phoneNumber }, { lga: lgas[3] });
   },
 
   //after choose payment plan
   "1*1*1": (res, phoneNumber) => {
     res.send(enterNameText);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[1] });
+    User.findOneAndUpdate({ phoneNumber }, { paymentPlan: Plans[1] });
   },
 
   "1*1*2": (res, phoneNumber) => {
     res.send(enterNameText);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
+    User.findOneAndUpdate({ phoneNumber }, { paymentPlan: Plans[2] });
   },
 
   "1*2*1": (res, phoneNumber) => {
     res.send(enterNameText);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[1] });
+    User.findOneAndUpdate({ phoneNumber }, { paymentPlan: Plans[1] });
   },
 
   "1*2*2": (res, phoneNumber) => {
     res.send(enterNameText);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
+    User.findOneAndUpdate({ phoneNumber }, { paymentPlan: Plans[2] });
   },
 
   "1*3*1": (res, phoneNumber) => {
     res.send(enterNameText);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[1] });
+    User.findOneAndUpdate({ phoneNumber }, { paymentPlan: Plans[1] });
   },
 
   "1*3*2": (res, phoneNumber) => {
     res.send(enterNameText);
-    User.findByIdAndUpdate(phoneNumber, { paymentPlan: Plans[2] });
+    User.findOneAndUpdate({ phoneNumber }, { paymentPlan: Plans[2] });
   },
 
   2: async (res, phoneNumber) => {
-    const user = await User.findById(phoneNumber);
+    const user = await User.findOne({ phoneNumber });
     const responseText = !!user
       ? `END Hi ${user.fullName}, Your BHIS Reg No is: BYS${
           phoneNumber.split("+234")[1]

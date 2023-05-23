@@ -26,7 +26,7 @@ app.post("*", (req, res) => {
     if (!name) res.send(`END invalid input`);
     res.send(`END Thank you ${name} for registering on the BHIS
     BHIS Reg No: ${bhisNum}`);
-    User.findByIdAndUpdate(phoneNumber, { fullName: name });
+    User.findOneAndUpdate({ phoneNumber }, { fullName: name });
   } else transactions[text](res);
 });
 

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   fullName: {
@@ -6,16 +6,18 @@ const UserSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 255,
     lowercase: true,
-    trim: true
+    trim: true,
   },
   paymentPlan: {
     type: String,
-    enum: ['monthly', 'daily', 'yearly']
+    enum: ["monthly", "daily", "yearly"],
   },
 
-  lga: { type: String }
+  lga: { type: String },
+
+  phoneNumber: { type: string },
 });
 
-const User = mongoose.model('users', UserSchema);
+const User = mongoose.model("users", UserSchema);
 
 module.exports = User;

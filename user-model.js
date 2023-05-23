@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
 
   lga: { type: String },
 
-  phoneNumber: { type: string },
+  phoneNumber: { type: String },
 });
 
 const User = mongoose.model("users", UserSchema);

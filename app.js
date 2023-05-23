@@ -19,8 +19,7 @@ app.get("*", (req, res) => {
 app.post("*", (req, res) => {
   let { sessionId, serviceCode, phoneNumber, text } = req.body;
   if (text == "") transactions.start(res);
-
-  if (!transaction[text] && text !== "") {
+  else if (!transactions[text] && text !== "") {
     let name = text.split("*");
     name = name[name.length - 1];
     const bhisNum = `BYS${phoneNumber}`;
